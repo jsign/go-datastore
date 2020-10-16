@@ -1,6 +1,10 @@
 package keytransform
 
-import ds "github.com/ipfs/go-datastore"
+import (
+	"fmt"
+
+	ds "github.com/ipfs/go-datastore"
+)
 
 // Pair is a convince struct for constructing a key transform.
 type Pair struct {
@@ -39,6 +43,7 @@ func (p PrefixTransform) InvertKey(k ds.Key) ds.Key {
 	}
 
 	if !p.Prefix.IsAncestorOf(k) {
+		fmt.Printf("##### Prefix %s, key %s", p.Prefix, k)
 		panic("expected prefix not found")
 	}
 
